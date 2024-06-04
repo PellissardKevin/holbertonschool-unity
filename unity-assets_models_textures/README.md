@@ -19,3 +19,6 @@ Requirements
     Scenes and project assets (such as Scenes, Scripts, Materials, etc.) must be organized as described in the task.
     Your scripts should include markup and notation to describe functionality, bugs, and help make the codebase easier to read and understand
     You may not use free or paid assets for this project
+
+
+Skyboxes: [Farland Skies - Cloudy Crown](https://assetstore.unity.com/packages/2d/textures-materials/sky/farland-skies-cloudy-crown-60004)
