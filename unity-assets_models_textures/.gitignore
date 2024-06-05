@@ -47,6 +47,18 @@ ExportedObj/
 *.opendb
 *.VC.db
 *.cs
+*.dae
+*.fbx
+*.glb
+*.obj
+*.stl
+*.mtl
+*.mtl.meta
+*.dae.meta
+*.fbx.meta
+*.glb.meta
+*.obj.meta
+*.stl.meta
 
 # Unity3D generated meta files
 *.pidb.meta
