@@ -46,14 +46,12 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-*.dae
 *.fbx
 *.glb
 *.obj
 *.stl
 *.mtl
 *.mtl.meta
-*.dae.meta
 *.fbx.meta
 *.glb.meta
 *.obj.meta
