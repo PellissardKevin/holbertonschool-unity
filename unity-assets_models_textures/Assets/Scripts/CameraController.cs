@@ -13,6 +13,9 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         player = GameObject.Find("Player");
         offset = transform.position - player.transform.position;
+
+        // Set the cameraTransform in the PlayerController
+        player.GetComponent<PlayerController>().cameraTransform = transform;
     }
 
     // Update is called once per frame

@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private Vector3 startPosition;
 
+    public Transform cameraTransform; // Reference to the camera transform
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -32,8 +34,18 @@ public class PlayerController : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical) * moveSpeed * Time.deltaTime;
-        Vector3 newPosition = rb.position + rb.transform.TransformDirection(movement);
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 desiredMoveDirection = forward * moveVertical + right * moveHorizontal;
+        Vector3 movement = desiredMoveDirection * moveSpeed * Time.deltaTime;
+        Vector3 newPosition = rb.position + movement;
 
         rb.MovePosition(newPosition);
     }
@@ -48,9 +60,6 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
-
-
-
 
     private void OnCollisionEnter(Collision collision)
     {
