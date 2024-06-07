@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public void Start()
+    {
+        Cursor.visible = true;
+    }
     public void Play()
     {
         SceneManager.LoadScene("Level01");
