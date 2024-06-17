@@ -145,7 +145,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg-button_Default
+      name: bg-button_0
       rect:
         serializedVersion: 2
         x: 0
@@ -166,7 +166,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg-button_Highlight
+      name: bg-button_1
       rect:
         serializedVersion: 2
         x: 203
@@ -187,7 +187,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bg-button_Pressed
+      name: bg-button_2
       rect:
         serializedVersion: 2
         x: 403
@@ -218,9 +218,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bg-button_Default: 3945451662944984592
-      bg-button_Highlight: 8440510077267459181
-      bg-button_Pressed: 1641548200286959669
+      bg-button_0: 3945451662944984592
+      bg-button_1: 8440510077267459181
+      bg-button_2: 1641548200286959669
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
