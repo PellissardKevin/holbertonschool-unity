@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: Changa-Bold SDF
+  m_Name: Changa-Bold
   m_EditorClassIdentifier: 
   hashCode: 0
   material: {fileID: -8671603952066462987}
