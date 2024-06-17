@@ -150,7 +150,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 599
+        width: 600
         height: 650
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -169,10 +169,10 @@ TextureImporter:
       name: button-level02_1
       rect:
         serializedVersion: 2
-        x: 598
+        x: 600
         y: 0
-        width: 610
-        height: 642
+        width: 600
+        height: 650
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,10 +190,10 @@ TextureImporter:
       name: button-level02_2
       rect:
         serializedVersion: 2
-        x: 1206
+        x: 1200
         y: 0
         width: 594
-        height: 648
+        height: 650
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
