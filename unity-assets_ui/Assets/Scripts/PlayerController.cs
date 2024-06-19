@@ -9,13 +9,10 @@ public class PlayerController : MonoBehaviour
     private LayerMask groundLayer;
     private float fallThreshold = -5f; // Threshold below which the player will respawn
     private Vector3 respawnOffset = new Vector3(0, 15, 0); // Offset for respawn position
-
     private Rigidbody rb;
     private bool isGrounded;
     private Vector3 startPosition;
-
     public Transform cameraTransform; // Reference to the camera transform
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,11 +25,6 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleJump();
         CheckRespawn();
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            // Load the menu scene
-            SceneManager.LoadScene("menu");
-        }
     }
 
     private void HandleMovement()
@@ -69,8 +61,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision with: " + collision.gameObject.name); // Add this line
-                                                                   // Check if the player has landed on the ground to reset isGrounded
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = true;

@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour
     private Vector3 offset;
     private GameObject player;
     public float turnSpeed = 4.0f;
+    public bool isInverted = false; // Public variable to control Y axis inversion
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,18 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * turnSpeed, Vector3.left) * offset;
+        if (PauseMenu.isPaused)
+        {
+            return; // Skip the rest of the update if paused
+        }
+
+        float mouseY = Input.GetAxis("Mouse Y");
+        if (isInverted)
+        {
+            mouseY *= -1f; // Invert the Y axis input if isInverted is true
+        }
+
+        offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * Quaternion.AngleAxis(mouseY * turnSpeed, Vector3.left) * offset;
         transform.position = player.transform.position + offset;
         transform.LookAt(player.transform.position);
     }
@@ -31,3 +43,4 @@ public class CameraController : MonoBehaviour
         offset = transform.position - player.transform.position; // Recalculate the offset
     }
 }
+

@@ -5,8 +5,12 @@ public class OptionsMenu : MonoBehaviour
 {
     public void Back()
     {
-        // Load the previous scene
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex - 1);
+        // Get the name of the current scene
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        Debug.Log(currentSceneName);
+
+        // Load the current scene again
+        SceneManager.LoadScene(currentSceneName);
     }
 }
