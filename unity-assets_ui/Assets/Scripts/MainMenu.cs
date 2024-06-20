@@ -3,6 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public void Start()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        PlayerPrefs.SetString("PreviousScene", currentSceneName);
+    }
+
     public void LevelSelect(int level)
     {
         // Load the corresponding level scene based on the parameter

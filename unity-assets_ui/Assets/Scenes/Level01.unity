@@ -11481,6 +11481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 4
+  isInverted: 0
 --- !u!1001 &1741780559
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         startPosition = transform.position;
         groundLayer = LayerMask.GetMask("Default");
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        PlayerPrefs.SetString("PreviousScene", currentSceneName);
     }
 
     void Update()

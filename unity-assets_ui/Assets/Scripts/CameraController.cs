@@ -1,17 +1,21 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
     private Vector3 offset;
     private GameObject player;
     public float turnSpeed = 4.0f;
-    public bool isInverted = false; // Public variable to control Y axis inversion
+    public bool isInverted = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        isInverted = PlayerPrefs.GetInt("IsInverted", 0) == 1;
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
+
         player = GameObject.Find("Player");
         offset = transform.position - player.transform.position;
 
