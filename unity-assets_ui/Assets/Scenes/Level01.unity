@@ -3076,6 +3076,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2726531933931687601, guid: 37f79e1c0c7a9c94ba7b0a7ed89c59dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3297842657508595163, guid: 37f79e1c0c7a9c94ba7b0a7ed89c59dd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -13905,6 +13909,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2170522175012593774, guid: 11929e65b35119d46bddd4e7a7974fba, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077429545262045707, guid: 11929e65b35119d46bddd4e7a7974fba, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3945451662944984592, guid: 97d47089170550a4c90e9e44711fcc4f, type: 3}
     - target: {fileID: 4428020321165624289, guid: 11929e65b35119d46bddd4e7a7974fba, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -13991,6 +14003,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5122260513322799243, guid: 11929e65b35119d46bddd4e7a7974fba, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8987798063398814602, guid: 11929e65b35119d46bddd4e7a7974fba, type: 3}
+      propertyPath: m_UseGraphicAlpha
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -14092,6 +14108,10 @@ PrefabInstance:
     - target: {fileID: 670838246268254047, guid: 89f9078f401a07f4e94a3fae6d338c07, type: 3}
       propertyPath: m_Name
       value: TimerCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 670838246268254047, guid: 89f9078f401a07f4e94a3fae6d338c07, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 841623146586257016, guid: 89f9078f401a07f4e94a3fae6d338c07, type: 3}
       propertyPath: m_Pivot.x
