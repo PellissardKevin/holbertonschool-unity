@@ -8307,6 +8307,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11929e65b35119d46bddd4e7a7974fba, type: 3}
+--- !u!1 &1264124298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5122260513322799243, guid: 11929e65b35119d46bddd4e7a7974fba, type: 3}
+  m_PrefabInstance: {fileID: 1264124297}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1268927555 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 34a06c42c28314949bf5e16cef46f004, type: 3}
@@ -9283,6 +9288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 1479925545}
   winText: {fileID: 1910697175}
+  winCanvas: {fileID: 1264124298}
 --- !u!1 &1377702007
 GameObject:
   m_ObjectHideFlags: 0

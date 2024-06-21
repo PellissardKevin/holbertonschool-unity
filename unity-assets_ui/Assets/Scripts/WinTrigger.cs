@@ -3,24 +3,32 @@ using UnityEngine.UI;
 
 public class WinTrigger : MonoBehaviour
 {
-    public Timer timer; // Reference to the Timer script attached to the player
     public Text winText; // Reference to the Text component for displaying win message
-
+    public GameObject winCanvas;
     private bool hasWon = false;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !hasWon)
         {
+            Timer timer = FindObjectOfType<Timer>();
             // Stop the timer
             timer.StopTimer();
 
-            // Increase text size and change color
-            winText.fontSize = 60;
-            winText.color = Color.green;
+            winCanvas.SetActive(true);
 
-            // Set flag to indicate player has won to prevent triggering multiple times
-            hasWon = true;
+            // Show the cursor
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            // Set the camera controller flag to stop the camera
+            CameraController.isWinMenuActive = true;
+
+            if (timer != null)
+            {
+                timer.Win();
+                hasWon = true;
+            }
         }
     }
 }

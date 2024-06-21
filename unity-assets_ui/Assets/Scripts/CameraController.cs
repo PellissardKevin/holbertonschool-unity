@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     private GameObject player;
     public float turnSpeed = 4.0f;
     public bool isInverted = false;
+    public static bool isWinMenuActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +22,15 @@ public class CameraController : MonoBehaviour
 
         // Set the cameraTransform in the PlayerController
         player.GetComponent<PlayerController>().cameraTransform = transform;
+
+        // Reset isWinMenuActive when a new level starts
+        isWinMenuActive = false;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        if (PauseMenu.isPaused)
+        if (PauseMenu.isPaused || isWinMenuActive)
         {
             return; // Skip the rest of the update if paused
         }
