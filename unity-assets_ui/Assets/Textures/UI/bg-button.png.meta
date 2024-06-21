@@ -145,7 +145,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg-button_0
+      name: bg-button
       rect:
         serializedVersion: 2
         x: 0
@@ -218,7 +218,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bg-button_0: 3945451662944984592
+      bg-button: 3945451662944984592
       bg-button_1: 8440510077267459181
       bg-button_2: 1641548200286959669
   mipmapLimitGroupName: 
