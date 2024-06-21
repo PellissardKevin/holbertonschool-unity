@@ -6,13 +6,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseCanvas;
     public static bool isPaused = false;
 
-    void Start()
-    {
-        // Show the cursor
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
-
     void Update()
     {
         // Check if the player presses the Escape key
@@ -37,8 +30,14 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         isPaused = true;
 
+        // Show the cursor
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         // Activate the pause canvas
         PauseCanvas.SetActive(true);
+
+
     }
 
     public void Resume()
