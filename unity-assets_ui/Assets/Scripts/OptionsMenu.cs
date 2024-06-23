@@ -36,6 +36,18 @@ public class OptionsMenu : MonoBehaviour
 
     public void Back()
     {
+        // Assuming the player GameObject has the tag "Player"
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            Vector3 playerPosition = player.transform.position;
+
+            // Save the player's position to PlayerPrefs
+            PlayerPrefs.SetFloat("PlayerPositionX", playerPosition.x);
+            PlayerPrefs.SetFloat("PlayerPositionY", playerPosition.y);
+            PlayerPrefs.SetFloat("PlayerPositionZ", playerPosition.z);
+        }
+
         string previousSceneName = PlayerPrefs.GetString("PreviousScene");
         SceneManager.LoadScene(previousSceneName);
     }

@@ -16,10 +16,21 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        startPosition = transform.position;
         groundLayer = LayerMask.GetMask("Default");
         string currentSceneName = SceneManager.GetActiveScene().name;
         PlayerPrefs.SetString("PreviousScene", currentSceneName);
+
+        // Load the saved position if it exists
+        if (PlayerPrefs.HasKey("PlayerPositionX") && PlayerPrefs.HasKey("PlayerPositionY") && PlayerPrefs.HasKey("PlayerPositionZ"))
+        {
+            float x = PlayerPrefs.GetFloat("PlayerPositionX");
+            float y = PlayerPrefs.GetFloat("PlayerPositionY");
+            float z = PlayerPrefs.GetFloat("PlayerPositionZ");
+            transform.position = new Vector3(x, y, z);
+        }
+
+        startPosition = transform.position;
+        PlayerPrefs.Save();
     }
 
     void Update()
@@ -48,6 +59,12 @@ public class PlayerController : MonoBehaviour
         Vector3 newPosition = rb.position + movement;
 
         rb.MovePosition(newPosition);
+
+        // Save the player's position to PlayerPrefs
+        PlayerPrefs.SetFloat("PlayerPositionX", newPosition.x);
+        PlayerPrefs.SetFloat("PlayerPositionY", newPosition.y);
+        PlayerPrefs.SetFloat("PlayerPositionZ", newPosition.z);
+        PlayerPrefs.Save();
     }
 
     private void HandleJump()
