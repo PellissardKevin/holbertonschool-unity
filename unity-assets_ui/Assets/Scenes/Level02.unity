@@ -9035,6 +9035,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5122260513322799243, guid: 11929e65b35119d46bddd4e7a7974fba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9166,7 +9170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf648a740b327840b204aa8dda91b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 1479925545}
   winText: {fileID: 1910697175}
   winCanvas: {fileID: 1371591833}
 --- !u!1 &1377702007
