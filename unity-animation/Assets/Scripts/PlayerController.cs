@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
         groundLayer = LayerMask.GetMask("Default");
         string currentSceneName = SceneManager.GetActiveScene().name;
         PlayerPrefs.SetString("PreviousScene", currentSceneName);
+        startPosition = transform.position;
 
         // Load the saved position if it exists
         if (PlayerPrefs.HasKey("PlayerPositionX") && PlayerPrefs.HasKey("PlayerPositionY") && PlayerPrefs.HasKey("PlayerPositionZ"))
@@ -29,7 +30,6 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(x, y, z);
         }
 
-        startPosition = transform.position;
         PlayerPrefs.Save();
     }
 
@@ -98,5 +98,9 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = startPosition + respawnOffset; // Reset player position with offset
         rb.velocity = Vector3.zero; // Reset velocity to prevent continued falling
+
+        // Reset PlayerPrefs
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
     }
 }

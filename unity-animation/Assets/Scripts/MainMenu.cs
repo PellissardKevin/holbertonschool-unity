@@ -16,12 +16,21 @@ public class MainMenu : MonoBehaviour
         {
             case 1:
                 SceneManager.LoadScene("Level01");
+                // Reset PlayerPrefs
+                PlayerPrefs.DeleteAll();
+                PlayerPrefs.Save();
                 break;
             case 2:
                 SceneManager.LoadScene("Level02");
+                // Reset PlayerPrefs
+                PlayerPrefs.DeleteAll();
+                PlayerPrefs.Save();
                 break;
             case 3:
                 SceneManager.LoadScene("Level03");
+                // Reset PlayerPrefs
+                PlayerPrefs.DeleteAll();
+                PlayerPrefs.Save();
                 break;
             default:
                 Debug.LogError("Invalid level number!");
@@ -39,6 +48,9 @@ public class MainMenu : MonoBehaviour
     {
         // Quit the game
         Debug.Log("Exited");
+        // Reset PlayerPrefs
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
         Application.Quit();
     }
 }
