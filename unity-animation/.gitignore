@@ -52,11 +52,6 @@ ExportedObj/
 *.obj
 *.stl
 *.mtl
-*.mtl.meta
-*.fbx.meta
-*.glb.meta
-*.obj.meta
-*.stl.meta
 
 # Unity3D generated meta files
 *.pidb.meta
