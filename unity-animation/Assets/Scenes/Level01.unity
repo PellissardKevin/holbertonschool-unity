@@ -14130,10 +14130,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1430431936022519049, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 4188558825917633620, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
       propertyPath: TimerText
       value: 
@@ -14186,6 +14182,10 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1739184756}
+    - target: {fileID: 8943017226672603443, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
