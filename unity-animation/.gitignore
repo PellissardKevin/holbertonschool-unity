@@ -9,7 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-/2D-clone/
+/[Tt]extMesh Pro/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -47,6 +47,16 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.fbx
+*.glb
+*.obj
+*.stl
+*.mtl
+*.mtl.meta
+*.fbx.meta
+*.glb.meta
+*.obj.meta
+*.stl.meta
 
 # Unity3D generated meta files
 *.pidb.meta
