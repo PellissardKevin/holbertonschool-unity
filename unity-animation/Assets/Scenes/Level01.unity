@@ -14134,10 +14134,6 @@ PrefabInstance:
       propertyPath: TimerText
       value: 
       objectReference: {fileID: 1910697175}
-    - target: {fileID: 4272242485541809927, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4746345408832045525, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
       propertyPath: m_Name
       value: Player
