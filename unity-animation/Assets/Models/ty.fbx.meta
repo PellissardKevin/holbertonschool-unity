@@ -40,7 +40,7 @@ ModelImporter:
       name: Boy01_UpperBody_MAT
     second: {fileID: 2100000, guid: c0aebc93777e4c74bb7279a0defae056, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 2
     materialLocation: 1
