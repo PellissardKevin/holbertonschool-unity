@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private float moveSpeed = 5f;
+    private float rotationSpeed = 10f;
+
     private float jumpForce = 11f;
     private float groundCheckDistance = 1.2f;
     private LayerMask groundLayer;
@@ -58,7 +60,15 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = desiredMoveDirection * moveSpeed * Time.deltaTime;
         Vector3 newPosition = rb.position + movement;
 
+        // Move the player
         rb.MovePosition(newPosition);
+
+        // Rotate the player to face the movement direction
+        if (desiredMoveDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(desiredMoveDirection);
+            rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
 
         // Save the player's position to PlayerPrefs
         PlayerPrefs.SetFloat("PlayerPositionX", newPosition.x);
@@ -66,6 +76,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat("PlayerPositionZ", newPosition.z);
         PlayerPrefs.Save();
     }
+
 
     private void HandleJump()
     {
