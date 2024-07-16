@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boy_Head_diffuse
+  m_Name: Boy01_Scarf_MAT
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -44,9 +44,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: cd98f8d689cdcbe478eb211423427d32, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7869e74c67cc6f84daf1fe3f2409bab3, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: -1, y: -1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
