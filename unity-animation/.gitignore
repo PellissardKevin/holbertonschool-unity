@@ -47,7 +47,6 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-*.fbx
 *.glb
 *.obj
 *.stl
