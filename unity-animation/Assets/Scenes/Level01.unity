@@ -3981,6 +3981,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acd8ce2f9a529444bbd1b51dbb6357ae, type: 3}
+--- !u!95 &722868754 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1820622529959238836, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
+  m_PrefabInstance: {fileID: 6801572689582309628}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &726790815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14138,10 +14143,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4967429653901253748, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 8427699743051284609, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -14182,6 +14183,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8927873701175016007, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 722868754}
     - target: {fileID: 8927873701175016007, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
       propertyPath: cameraTransform
       value: 

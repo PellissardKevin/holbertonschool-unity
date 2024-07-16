@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17aa5408cfd1ce84e88d3f8ad96f5a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1820622529959238836}
   cameraTransform: {fileID: 0}
 --- !u!114 &4188558825917633620
 MonoBehaviour:
@@ -233,6 +234,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53d393b5a18001641816107d427d55bb, type: 3}
+--- !u!95 &1820622529959238836 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 53d393b5a18001641816107d427d55bb, type: 3}
+  m_PrefabInstance: {fileID: 5201291580342509861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5738723228402501326 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 53d393b5a18001641816107d427d55bb, type: 3}

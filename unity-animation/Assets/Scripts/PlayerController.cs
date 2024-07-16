@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     private float moveSpeed = 5f;
     private float rotationSpeed = 10f;
-
+    public Animator animator;
     private float jumpForce = 11f;
     private float groundCheckDistance = 1.2f;
     private LayerMask groundLayer;
@@ -69,6 +69,10 @@ public class PlayerController : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(desiredMoveDirection);
             rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+
+        // Update Animator parameter
+        float speed = desiredMoveDirection.magnitude;
+        animator.SetFloat("Speed", speed);
 
         // Save the player's position to PlayerPrefs
         PlayerPrefs.SetFloat("PlayerPositionX", newPosition.x);
