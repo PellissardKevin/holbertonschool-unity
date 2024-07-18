@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         HandleJump();
         CheckFalling();
         CheckRespawn();
+
     }
 
     private void HandleMovement()
@@ -132,7 +133,6 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool("isFalling", true);
         animator.SetBool("IsJumping", false);
-
 
         // Reset PlayerPrefs
         PlayerPrefs.DeleteAll();
