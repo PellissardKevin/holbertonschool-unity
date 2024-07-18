@@ -3981,11 +3981,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acd8ce2f9a529444bbd1b51dbb6357ae, type: 3}
---- !u!95 &722868754 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1820622529959238836, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
-  m_PrefabInstance: {fileID: 6801572689582309628}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &726790815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14140,16 +14135,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1820622529959238836, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
-      propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'Boy:Hips'\n\tTransform 'Boy:LeftArm'\n\tTransform
-        'Boy:RightHandRing1'\n\tTransform 'Boy:RightHandThumb1'\n\tTransform 'Boy:LeftHandRing2'\n\tTransform
-        'Boy:Head'\n\tTransform 'Boy:LeftHandPinky2'\n\tTransform 'Boy:RightHandIndex2'\n\tTransform
-        'Boy:RightArm'\n\tTransform 'Boy:LeftHandIndex3'\n\tand more ...\n\tFrom
-        animation clip 'Jump'"
-      objectReference: {fileID: 0}
-    - target: {fileID: 1820622529959238836, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
@@ -14157,17 +14142,9 @@ PrefabInstance:
       propertyPath: TimerText
       value: 
       objectReference: {fileID: 1910697175}
-    - target: {fileID: 4272242485541809927, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4746345408832045525, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5738723228402501326, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8427699743051284609, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14210,17 +14187,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8927873701175016007, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 722868754}
-    - target: {fileID: 8927873701175016007, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1739184756}
-    - target: {fileID: 8927873701175016007, guid: 69a851983a5c1584ea977bc038bb5738, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
