@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private float rotationSpeed = 10f;
     public Animator animator;
     private float jumpForce = 11f;
-    private float groundCheckDistance = 1.25f;
+    private float groundCheckDistance = 1f;
     private LayerMask groundLayer;
     private float fallThreshold = -5f; // Threshold below which the player will respawn
     private Vector3 respawnOffset = new Vector3(0, 15, 0); // Offset for respawn position
@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private Vector3 startPosition;
     public Transform cameraTransform; // Reference to the camera transform
+    private bool isJumping;
 
     void Start()
     {
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleJump();
+        CheckFalling();
         CheckRespawn();
     }
 
@@ -87,13 +89,12 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance, groundLayer);
 
-        Debug.Log($"Ground check: isGrounded = {isGrounded}, hit.collider = {hit.collider}");
-
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             animator.SetTrigger("Jump");
             animator.SetBool("IsJumping", true);
+            isJumping = true;
         }
     }
 
@@ -102,7 +103,9 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            isJumping = false;
             animator.SetBool("IsJumping", false);
+            animator.SetBool("isFalling", false);
         }
     }
 
@@ -114,10 +117,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void CheckFalling()
+    {
+        if (!isGrounded && !isJumping)
+        {
+            animator.SetBool("isFalling", true);
+        }
+    }
+
     private void Respawn()
     {
         transform.position = startPosition + respawnOffset; // Reset player position with offset
         rb.velocity = Vector3.zero; // Reset velocity to prevent continued falling
+
+        animator.SetBool("isFalling", true);
+        animator.SetBool("IsJumping", false);
+
 
         // Reset PlayerPrefs
         PlayerPrefs.DeleteAll();
