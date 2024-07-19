@@ -7,9 +7,7 @@ public class PlayerController : MonoBehaviour
     private float rotationSpeed = 10f;
     public Animator animator;
     private float jumpForce = 11f;
-    private float groundCheckDistance = 1f;
-    private LayerMask groundLayer;
-    private float fallThreshold = -5f; // Threshold below which the player will respawn
+    private float groundCheckDistance = 1.2f;
     private Vector3 respawnOffset = new Vector3(0, 15, 0); // Offset for respawn position
     private Rigidbody rb;
     private bool isGrounded;
@@ -20,7 +18,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        groundLayer = LayerMask.GetMask("Default");
         string currentSceneName = SceneManager.GetActiveScene().name;
         PlayerPrefs.SetString("PreviousScene", currentSceneName);
         startPosition = transform.position;
@@ -39,11 +36,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        animator.SetBool("isMoving", false);
         HandleMovement();
         HandleJump();
-        CheckFalling();
         CheckRespawn();
-
     }
 
     private void HandleMovement()
@@ -70,13 +66,12 @@ public class PlayerController : MonoBehaviour
         // Rotate the player to face the movement direction
         if (desiredMoveDirection != Vector3.zero)
         {
+            animator.SetBool("isMoving", true);
             Quaternion targetRotation = Quaternion.LookRotation(desiredMoveDirection);
             rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        // Update Animator parameter
-        float speed = desiredMoveDirection.magnitude;
-        animator.SetFloat("Speed", speed);
+
 
         // Save the player's position to PlayerPrefs
         PlayerPrefs.SetFloat("PlayerPositionX", newPosition.x);
@@ -88,14 +83,15 @@ public class PlayerController : MonoBehaviour
     private void HandleJump()
     {
         RaycastHit hit;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance, groundLayer);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance);
 
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded && hit.collider.CompareTag("Ground") && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            animator.SetTrigger("Jump");
             animator.SetBool("IsJumping", true);
             isJumping = true;
+            isGrounded = false;
+
         }
     }
 
@@ -112,17 +108,10 @@ public class PlayerController : MonoBehaviour
 
     private void CheckRespawn()
     {
-        if (transform.position.y < fallThreshold)
-        {
-            Respawn();
-        }
-    }
-
-    private void CheckFalling()
-    {
-        if (!isGrounded && !isJumping)
+        if (transform.position.y < -10f)
         {
             animator.SetBool("isFalling", true);
+            Respawn();
         }
     }
 
@@ -131,11 +120,12 @@ public class PlayerController : MonoBehaviour
         transform.position = startPosition + respawnOffset; // Reset player position with offset
         rb.velocity = Vector3.zero; // Reset velocity to prevent continued falling
 
-        animator.SetBool("isFalling", true);
         animator.SetBool("IsJumping", false);
 
         // Reset PlayerPrefs
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey("PlayerPositionX");
+        PlayerPrefs.DeleteKey("PlayerPositionY");
+        PlayerPrefs.DeleteKey("PlayerPositionZ");
         PlayerPrefs.Save();
     }
 }

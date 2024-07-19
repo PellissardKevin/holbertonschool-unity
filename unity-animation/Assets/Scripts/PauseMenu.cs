@@ -52,9 +52,16 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        // Reset PlayerPrefs
+        PlayerPrefs.DeleteKey("PlayerPositionX");
+        PlayerPrefs.DeleteKey("PlayerPositionY");
+        PlayerPrefs.DeleteKey("PlayerPositionZ");
+        PlayerPrefs.Save();
+
         // Reset isPaused and Time.timeScale before reloading the scene
         isPaused = false;
         Time.timeScale = 1f;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         PauseCanvas.SetActive(false);
     }
@@ -63,6 +70,9 @@ public class PauseMenu : MonoBehaviour
     {
         // Reset isPaused and Time.timeScale before loading the MainMenu scene
         isPaused = false;
+        PlayerPrefs.DeleteKey("PlayerPositionX");
+        PlayerPrefs.DeleteKey("PlayerPositionY");
+        PlayerPrefs.DeleteKey("PlayerPositionZ");
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }

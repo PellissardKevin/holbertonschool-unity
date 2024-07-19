@@ -5,7 +5,6 @@ public class CutsceneController : MonoBehaviour
     public GameObject mainCamera;
     public MonoBehaviour playerController;
     public GameObject timerCanvas;
-
     private Animator cutsceneAnimator;
 
     void Start()
@@ -35,12 +34,13 @@ public class CutsceneController : MonoBehaviour
         AnimatorStateInfo stateInfo = cutsceneAnimator.GetCurrentAnimatorStateInfo(0);
 
         // Check if the current animation is "Intro01" and its normalized time is >= 1
-        if (stateInfo.IsName("Intro01") && stateInfo.normalizedTime >= 1.0f)
+        if ( (stateInfo.IsName("Intro01") || stateInfo.IsName("Intro02") || stateInfo.IsName("Intro03")) && stateInfo.normalizedTime >= 1.0f)
         {
+            Debug.Log("update cutscene");
             mainCamera.SetActive(true);
             playerController.enabled = true;
             timerCanvas.SetActive(true);
-            this.enabled = false;  // Disable CutsceneController
+            gameObject.SetActive(false);  // Disable CutsceneCamera
         }
     }
 }
