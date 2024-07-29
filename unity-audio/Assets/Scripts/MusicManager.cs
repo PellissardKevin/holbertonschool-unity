@@ -1,5 +1,5 @@
-using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
@@ -7,8 +7,15 @@ public class MusicManager : MonoBehaviour
     private static MusicManager instance = null;
     private AudioSource audioSource;
 
-    public AudioClip mainMenuMusic; // Assign these in the Inspector
+    public AudioClip mainMenuMusic;
     public AudioClip levelMusic;
+    public AudioClip victoryMusic;
+
+    public AudioMixerSnapshot defaultSnapshot;
+    public AudioMixerSnapshot pausedSnapshot;
+
+    private const string BGM_VOLUME_KEY = "BGMVolume";
+    private const float DEFAULT_VOLUME = 1f;  // Default volume level if not set
 
     void Awake()
     {
@@ -26,6 +33,10 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+
+        // Load saved BGM volume and apply it
+        float savedVolume = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, DEFAULT_VOLUME);
+        SetVolume(savedVolume);
     }
 
     void OnEnable()
@@ -40,40 +51,84 @@ public class MusicManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        string musicClipName = "";
-
-        if (scene.name == "MainMenu")
+        switch (scene.name)
         {
-            musicClipName = "MainMenuMusic";
-            PlayMusic(mainMenuMusic);
-        }
-        else if (scene.name == "Level01" || scene.name == "Level02" || scene.name == "Level03")
-        {
-            musicClipName = "LevelMusic";
-            PlayMusic(levelMusic);
-        }
-        else
-        {
-            StopMusic(); // Stop music for other scenes
+            case "MainMenu":
+            case "OptionsMenu":
+                PlayMusic(mainMenuMusic);
+                break;
+            case "Level01":
+            case "Level02":
+            case "Level03":
+                PlayMusic(levelMusic);
+                break;
+            default:
+                StopMusic();
+                break;
         }
     }
 
     public void PlayMusic(AudioClip clip)
     {
-        if (audioSource.isPlaying && audioSource.clip == clip)
+        if (clip == null)
         {
-            return; // No need to play the same clip again
+            Debug.LogWarning("Music clip is not assigned.");
+            return;
+        }
+
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
         }
 
         audioSource.clip = clip;
+        audioSource.loop = true;
         audioSource.Play();
     }
 
     public void StopMusic()
     {
-        if (audioSource != null)
+        if (audioSource != null && audioSource.isPlaying)
         {
             audioSource.Stop();
         }
+    }
+
+    public void PauseGame()
+    {
+        if (pausedSnapshot != null)
+        {
+            pausedSnapshot.TransitionTo(0f); // Transitions to the paused snapshot
+        }
+        else
+        {
+            Debug.LogWarning("Paused Snapshot is not assigned.");
+        }
+    }
+
+    public void ResumeGame()
+    {
+        if (defaultSnapshot != null)
+        {
+            defaultSnapshot.TransitionTo(0f); // Transitions back to the default snapshot
+        }
+        else
+        {
+            Debug.LogWarning("Default Snapshot is not assigned.");
+        }
+    }
+
+    public void SetVolume(float volume)
+    {
+        if (audioSource != null)
+        {
+            audioSource.volume = volume;
+        }
+    }
+
+    // Ensure snapshot transitions to default
+    public void EnsureDefaultSnapshot()
+    {
+        ResumeGame();
     }
 }

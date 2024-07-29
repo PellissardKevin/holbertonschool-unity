@@ -529,6 +529,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invertYToggle: {fileID: 1705547329}
+  bgmSlider: {fileID: 1485313280}
+  sfxSlider: {fileID: 906329688}
 --- !u!1 &690582015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,7 +1012,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1433,7 +1435,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

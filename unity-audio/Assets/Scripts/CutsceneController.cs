@@ -22,9 +22,17 @@ public class CutsceneController : MonoBehaviour
         {
             cutsceneAnimator.Play("Intro01");
         }
+        else if (cutsceneAnimator.HasState(0, Animator.StringToHash("Intro02")))
+        {
+            cutsceneAnimator.Play("Intro02");
+        }
+        else if (cutsceneAnimator.HasState(0, Animator.StringToHash("Intro03")))
+        {
+            cutsceneAnimator.Play("Intro03");
+        }
         else
         {
-            Debug.LogError("The 'Intro01' animation state could not be found in the Animator Controller.");
+            Debug.LogError("The 'Intro' animation state could not be found in the Animator Controller.");
         }
     }
 
@@ -34,9 +42,8 @@ public class CutsceneController : MonoBehaviour
         AnimatorStateInfo stateInfo = cutsceneAnimator.GetCurrentAnimatorStateInfo(0);
 
         // Check if the current animation is "Intro01" and its normalized time is >= 1
-        if ( (stateInfo.IsName("Intro01") || stateInfo.IsName("Intro02") || stateInfo.IsName("Intro03")) && stateInfo.normalizedTime >= 1.0f)
+        if ((stateInfo.IsName("Intro01") || stateInfo.IsName("Intro02") || stateInfo.IsName("Intro03")) && stateInfo.normalizedTime >= 1.0f)
         {
-            Debug.Log("update cutscene");
             mainCamera.SetActive(true);
             playerController.enabled = true;
             timerCanvas.SetActive(true);

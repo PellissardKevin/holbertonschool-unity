@@ -6,6 +6,17 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseCanvas;
     public static bool isPaused = false;
 
+    private MusicManager musicManager;
+
+    void Start()
+    {
+        musicManager = FindObjectOfType<MusicManager>();
+        if (musicManager == null)
+        {
+            Debug.LogError("MusicManager not found in the scene.");
+        }
+    }
+
     void Update()
     {
         // Check if the player presses the Escape key
@@ -37,7 +48,11 @@ public class PauseMenu : MonoBehaviour
         // Activate the pause canvas
         PauseCanvas.SetActive(true);
 
-
+        // Transition to paused snapshot
+        if (musicManager != null)
+        {
+            musicManager.PauseGame();
+        }
     }
 
     public void Resume()
@@ -48,6 +63,12 @@ public class PauseMenu : MonoBehaviour
 
         // Deactivate the pause canvas
         PauseCanvas.SetActive(false);
+
+        // Transition to default snapshot
+        if (musicManager != null)
+        {
+            musicManager.ResumeGame();
+        }
     }
 
     public void Restart()
@@ -67,7 +88,6 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         PauseCanvas.SetActive(false);
     }
-
 
     public void MainMenu()
     {

@@ -5,13 +5,15 @@ public class WinTrigger : MonoBehaviour
 {
     public Text winText; // Reference to the Text component for displaying win message
     public GameObject winCanvas;
+    public AudioClip victoryPiano; // Reference to the victory sound clip
+    private AudioSource audioSource;
     private bool hasWon = false;
-
     private MusicManager musicManager;
 
     void Start()
     {
         musicManager = FindObjectOfType<MusicManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -41,6 +43,13 @@ public class WinTrigger : MonoBehaviour
             if (musicManager != null)
             {
                 musicManager.StopMusic();
+            }
+
+            // Play the victory sound
+            if (audioSource != null && victoryPiano != null)
+            {
+                audioSource.clip = victoryPiano;
+                audioSource.Play();
             }
         }
     }
