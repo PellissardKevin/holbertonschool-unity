@@ -7,6 +7,13 @@ public class WinTrigger : MonoBehaviour
     public GameObject winCanvas;
     private bool hasWon = false;
 
+    private MusicManager musicManager;
+
+    void Start()
+    {
+        musicManager = FindObjectOfType<MusicManager>();
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !hasWon)
@@ -28,6 +35,12 @@ public class WinTrigger : MonoBehaviour
             {
                 timer.Win();
                 hasWon = true;
+            }
+
+            // Stop the background music
+            if (musicManager != null)
+            {
+                musicManager.StopMusic();
             }
         }
     }

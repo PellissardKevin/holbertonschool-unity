@@ -15,15 +15,25 @@ public class PlayerController : MonoBehaviour
     public Transform cameraTransform; // Reference to the camera transform
     public bool isJumping;
 
+    public AudioSource grassFootsteps;
+    public AudioSource rockFootsteps;
+    public LayerMask grassLayer;
+    public LayerMask rockLayer;
+    public AudioClip footstepSoundGrass;
+    public AudioClip footstepSoundRock;
+
+    public AudioSource grassLanding;
+    public AudioSource rockLanding;
+    public AudioClip landingSoundGrass;
+    public AudioClip landingSoundRock;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         string currentSceneName = SceneManager.GetActiveScene().name;
         PlayerPrefs.SetString("PreviousScene", currentSceneName);
-        startPosition = transform.position;
-        isJumping = false;
 
-        // Load the saved position if it exists
+        // Load or set initial position
         if (PlayerPrefs.HasKey("PlayerPositionX") && PlayerPrefs.HasKey("PlayerPositionY") && PlayerPrefs.HasKey("PlayerPositionZ"))
         {
             float x = PlayerPrefs.GetFloat("PlayerPositionX");
@@ -31,6 +41,14 @@ public class PlayerController : MonoBehaviour
             float z = PlayerPrefs.GetFloat("PlayerPositionZ");
             transform.position = new Vector3(x, y, z);
         }
+        else
+        {
+            // Set to a default position if no PlayerPrefs are found
+            transform.position = startPosition;
+        }
+        
+        lastPosition = transform.position; // Initialize lastPosition
+        isJumping = false;
 
         PlayerPrefs.Save();
     }
@@ -41,7 +59,20 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleJump();
         CheckRespawn();
+
+        bool isRunning = Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0;
+
+        if (isRunning && isGrounded && !isJumping)
+        {
+            PlayFootsteps();
+        }
+        else
+        {
+            StopFootsteps();
+        }
     }
+
+    private Vector3 lastPosition;
 
     private void HandleMovement()
     {
@@ -72,14 +103,17 @@ public class PlayerController : MonoBehaviour
             rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-
-
-        // Save the player's position to PlayerPrefs
-        PlayerPrefs.SetFloat("PlayerPositionX", newPosition.x);
-        PlayerPrefs.SetFloat("PlayerPositionY", newPosition.y);
-        PlayerPrefs.SetFloat("PlayerPositionZ", newPosition.z);
-        PlayerPrefs.Save();
+        // Save the player's position to PlayerPrefs if it has changed significantly
+        if (Vector3.Distance(newPosition, lastPosition) > 0.1f) // You can adjust the threshold
+        {
+            PlayerPrefs.SetFloat("PlayerPositionX", newPosition.x);
+            PlayerPrefs.SetFloat("PlayerPositionY", newPosition.y);
+            PlayerPrefs.SetFloat("PlayerPositionZ", newPosition.z);
+            PlayerPrefs.Save();
+            lastPosition = newPosition;
+        }
     }
+
 
     private void HandleJump()
     {
@@ -92,7 +126,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsJumping", true);
             isJumping = true;
             isGrounded = false;
-
+            StopFootsteps();
         }
     }
 
@@ -104,6 +138,7 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             animator.SetBool("IsJumping", false);
             animator.SetBool("isFalling", false);
+            PlayLandingSound();
         }
     }
 
@@ -123,10 +158,51 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool("IsJumping", false);
 
-        // Reset PlayerPrefs
+        // Clear PlayerPrefs related to position
         PlayerPrefs.DeleteKey("PlayerPositionX");
         PlayerPrefs.DeleteKey("PlayerPositionY");
         PlayerPrefs.DeleteKey("PlayerPositionZ");
         PlayerPrefs.Save();
+    }
+
+
+    void PlayFootsteps()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance, grassLayer))
+        {
+            if (!grassFootsteps.isPlaying)
+            {
+                grassFootsteps.PlayOneShot(footstepSoundGrass);
+                rockFootsteps.Stop();
+            }
+        }
+        else if (Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance, rockLayer))
+        {
+            if (!rockFootsteps.isPlaying)
+            {
+                rockFootsteps.PlayOneShot(footstepSoundRock);
+                grassFootsteps.Stop();
+            }
+        }
+    }
+
+    void StopFootsteps()
+    {
+        grassFootsteps.Stop();
+        rockFootsteps.Stop();
+    }
+
+    void PlayLandingSound()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance, grassLayer))
+        {
+            grassLanding.PlayOneShot(landingSoundGrass);
+        }
+        else if (Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance, rockLayer))
+        {
+            rockLanding.PlayOneShot(landingSoundRock);
+        }
     }
 }

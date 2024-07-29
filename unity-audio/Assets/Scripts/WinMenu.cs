@@ -10,6 +10,12 @@ public class WinMenu : MonoBehaviour
 
     public void Next()
     {
+        // Reset PlayerPrefs
+        PlayerPrefs.DeleteKey("PlayerPositionX");
+        PlayerPrefs.DeleteKey("PlayerPositionY");
+        PlayerPrefs.DeleteKey("PlayerPositionZ");
+        PlayerPrefs.Save();
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 

@@ -52,11 +52,13 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        // Reset PlayerPrefs
+        Debug.Log("Restart button pressed");
+
+        // Reset all PlayerPrefs
         PlayerPrefs.DeleteKey("PlayerPositionX");
         PlayerPrefs.DeleteKey("PlayerPositionY");
         PlayerPrefs.DeleteKey("PlayerPositionZ");
-        PlayerPrefs.Save();
+        PlayerPrefs.Save(); // Ensure changes are saved
 
         // Reset isPaused and Time.timeScale before reloading the scene
         isPaused = false;
@@ -65,6 +67,7 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         PauseCanvas.SetActive(false);
     }
+
 
     public void MainMenu()
     {
