@@ -11,10 +11,12 @@ public class MusicManager : MonoBehaviour
     public AudioClip levelMusic;
     public AudioClip victoryMusic;
 
+    public AudioMixer masterMixer;  // Reference to the master AudioMixer
     public AudioMixerSnapshot defaultSnapshot;
     public AudioMixerSnapshot pausedSnapshot;
 
     private const string BGM_VOLUME_KEY = "BGMVolume";
+    private const string SFX_VOLUME_KEY = "SFXVolume"; // Key for SFX volume
     private const float DEFAULT_VOLUME = 1f;  // Default volume level if not set
 
     void Awake()
@@ -34,37 +36,30 @@ public class MusicManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        // Load saved BGM volume and apply it
-        float savedVolume = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, DEFAULT_VOLUME);
-        SetVolume(savedVolume);
+        // Load and apply saved BGM volume
+        float savedBGMVolume = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, DEFAULT_VOLUME);
+        SetBGMVolume(savedBGMVolume);
+
+        // Load and apply saved SFX volume
+        float savedSFXVolume = PlayerPrefs.GetFloat(SFX_VOLUME_KEY, DEFAULT_VOLUME);
+        SetSFXVolume(savedSFXVolume);
     }
 
-    void OnEnable()
+    // BGM Volume Management
+    public void SetBGMVolume(float volume)
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        switch (scene.name)
+        if (audioSource != null)
         {
-            case "MainMenu":
-            case "OptionsMenu":
-                PlayMusic(mainMenuMusic);
-                break;
-            case "Level01":
-            case "Level02":
-            case "Level03":
-                PlayMusic(levelMusic);
-                break;
-            default:
-                StopMusic();
-                break;
+            audioSource.volume = volume;
+        }
+    }
+
+    // SFX Volume Management
+    public void SetSFXVolume(float volume)
+    {
+        if (masterMixer != null)
+        {
+            masterMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20); // Convert to dB
         }
     }
 
@@ -118,15 +113,6 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public void SetVolume(float volume)
-    {
-        if (audioSource != null)
-        {
-            audioSource.volume = volume;
-        }
-    }
-
-    // Ensure snapshot transitions to default
     public void EnsureDefaultSnapshot()
     {
         ResumeGame();

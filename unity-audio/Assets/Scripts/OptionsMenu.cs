@@ -6,6 +6,7 @@ public class OptionsMenu : MonoBehaviour
 {
     public Toggle invertYToggle;
     public Slider bgmSlider;  // Reference to the BGM volume slider
+    public Slider sfxSlider;  // Reference to the SFX volume slider
     private CameraController cameraController;
     private MusicManager musicManager;  // Reference to the MusicManager
 
@@ -20,21 +21,29 @@ public class OptionsMenu : MonoBehaviour
             invertYToggle.isOn = PlayerPrefs.GetInt("IsInverted", 0) == 1;
         }
 
-        // Load saved BGM volume setting and set slider value
-        float savedVolume = PlayerPrefs.GetFloat("BGMVolume", 1f);  // Default volume is 1
-        bgmSlider.value = savedVolume;
+        // Load and set BGM volume slider value
+        float savedBGMVolume = PlayerPrefs.GetFloat("BGMVolume", 1f);  // Default volume is 1
+        bgmSlider.value = savedBGMVolume;
 
-        // Add listener for slider value change
+        // Load and set SFX volume slider value
+        float savedSFXVolume = PlayerPrefs.GetFloat("SFXVolume", 1f);  // Default volume is 1
+        sfxSlider.value = savedSFXVolume;
+
+        // Add listeners for slider value changes
         bgmSlider.onValueChanged.AddListener(OnBGMVolumeChanged);
+        sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
     }
 
     public void Apply()
     {
-        // Save the invert Y setting to PlayerPrefs
+        // Save invert Y setting
         PlayerPrefs.SetInt("IsInverted", invertYToggle.isOn ? 1 : 0);
 
-        // Save the BGM volume setting to PlayerPrefs
+        // Save BGM volume setting
         PlayerPrefs.SetFloat("BGMVolume", bgmSlider.value);
+
+        // Save SFX volume setting
+        PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value);
 
         PlayerPrefs.Save();
 
@@ -42,13 +51,6 @@ public class OptionsMenu : MonoBehaviour
         if (cameraController != null)
         {
             cameraController.isInverted = invertYToggle.isOn;
-            Debug.Log("cameraController: " + cameraController.isInverted);
-        }
-
-        // Ensure MusicManager is not in the paused state
-        if (musicManager != null)
-        {
-            musicManager.EnsureDefaultSnapshot(); // Ensure it transitions to the default snapshot
         }
 
         Back();
@@ -68,6 +70,12 @@ public class OptionsMenu : MonoBehaviour
             PlayerPrefs.SetFloat("PlayerPositionZ", playerPosition.z);
         }
 
+        // Ensure MusicManager is not in the paused state
+        if (musicManager != null)
+        {
+            musicManager.EnsureDefaultSnapshot(); // Ensure it transitions to the default snapshot
+        }
+
         string previousSceneName = PlayerPrefs.GetString("PreviousScene");
         SceneManager.LoadScene(previousSceneName);
     }
@@ -76,7 +84,19 @@ public class OptionsMenu : MonoBehaviour
     {
         if (musicManager != null)
         {
-            musicManager.SetVolume(volume);  // Set volume on the MusicManager
+            musicManager.SetBGMVolume(volume);  // Set volume on the MusicManager
+        }
+        else
+        {
+            Debug.LogWarning("MusicManager not found in the scene.");
+        }
+    }
+
+    private void OnSFXVolumeChanged(float volume)
+    {
+        if (musicManager != null)
+        {
+            musicManager.SetSFXVolume(volume);  // Set volume on the MusicManager
         }
         else
         {

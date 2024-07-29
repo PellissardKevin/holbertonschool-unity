@@ -73,8 +73,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        Debug.Log("Restart button pressed");
-
         // Reset all PlayerPrefs
         PlayerPrefs.DeleteKey("PlayerPositionX");
         PlayerPrefs.DeleteKey("PlayerPositionY");
@@ -97,6 +95,13 @@ public class PauseMenu : MonoBehaviour
         PlayerPrefs.DeleteKey("PlayerPositionY");
         PlayerPrefs.DeleteKey("PlayerPositionZ");
         Time.timeScale = 1f;
+
+        // Transition to default snapshot
+        if (musicManager != null)
+        {
+            musicManager.ResumeGame();
+        }
+
         SceneManager.LoadScene("MainMenu");
     }
 
