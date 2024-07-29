@@ -11,6 +11,9 @@ public class MusicManager : MonoBehaviour
     public AudioClip levelMusic;
     public AudioClip victoryMusic;
 
+    public AudioClip level02Music; // Add new clip for Level02
+    public AudioClip level03Music; // Add new clip for Level03
+
     public AudioMixer masterMixer;  // Reference to the master AudioMixer
     public AudioMixerSnapshot defaultSnapshot;
     public AudioMixerSnapshot pausedSnapshot;
@@ -19,22 +22,27 @@ public class MusicManager : MonoBehaviour
     private const string SFX_VOLUME_KEY = "SFXVolume"; // Key for SFX volume
     private const float DEFAULT_VOLUME = 1f;  // Default volume level if not set
 
+
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            audioSource = GetComponent<AudioSource>();
         }
         else if (instance != this)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Prevent duplicates
         }
     }
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
 
         // Load and apply saved BGM volume
         float savedBGMVolume = PlayerPrefs.GetFloat(BGM_VOLUME_KEY, DEFAULT_VOLUME);
@@ -45,29 +53,52 @@ public class MusicManager : MonoBehaviour
         SetSFXVolume(savedSFXVolume);
     }
 
-    // BGM Volume Management
-    public void SetBGMVolume(float volume)
+
+    void OnEnable()
     {
-        if (audioSource != null)
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        switch (scene.name)
         {
-            audioSource.volume = volume;
+            case "MainMenu":
+            case "Options":
+                PlayMusic(mainMenuMusic); // Use appropriate clip based on scene
+                break;
+            case "Level01":
+                PlayMusic(levelMusic);
+                break;
+            case "Level02":
+                PlayMusic(level02Music);  // Play Level02 music
+                break;
+            case "Level03":
+                PlayMusic(level03Music);  // Play Level03 music
+                break;
+            default:
+                StopMusic();
+                break;
         }
     }
 
-    // SFX Volume Management
-    public void SetSFXVolume(float volume)
-    {
-        if (masterMixer != null)
-        {
-            masterMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20); // Convert to dB
-        }
-    }
 
     public void PlayMusic(AudioClip clip)
     {
         if (clip == null)
         {
             Debug.LogWarning("Music clip is not assigned.");
+            return;
+        }
+
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource is not initialized.");
             return;
         }
 
@@ -80,6 +111,7 @@ public class MusicManager : MonoBehaviour
         audioSource.loop = true;
         audioSource.Play();
     }
+
 
     public void StopMusic()
     {
@@ -95,10 +127,6 @@ public class MusicManager : MonoBehaviour
         {
             pausedSnapshot.TransitionTo(0f); // Transitions to the paused snapshot
         }
-        else
-        {
-            Debug.LogWarning("Paused Snapshot is not assigned.");
-        }
     }
 
     public void ResumeGame()
@@ -107,9 +135,22 @@ public class MusicManager : MonoBehaviour
         {
             defaultSnapshot.TransitionTo(0f); // Transitions back to the default snapshot
         }
-        else
+    }
+
+
+    public void SetBGMVolume(float volume)
+    {
+        if (audioSource != null)
         {
-            Debug.LogWarning("Default Snapshot is not assigned.");
+            audioSource.volume = volume;
+        }
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        if (masterMixer != null)
+        {
+            masterMixer.SetFloat(SFX_VOLUME_KEY, Mathf.Log10(volume) * 20); // Convert to dB
         }
     }
 

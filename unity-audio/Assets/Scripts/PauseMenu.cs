@@ -24,16 +24,17 @@ public class PauseMenu : MonoBehaviour
         {
             if (isPaused)
             {
-                // If the pause canvas is active, resume the game
+                // If the game is paused, resume the game
                 Resume();
             }
             else
             {
-                // If the pause canvas is not active, pause the game
+                // If the game is not paused, pause the game
                 Pause();
             }
         }
     }
+
 
     public void Pause()
     {
@@ -53,6 +54,7 @@ public class PauseMenu : MonoBehaviour
         {
             musicManager.PauseGame();
         }
+
     }
 
     public void Resume()

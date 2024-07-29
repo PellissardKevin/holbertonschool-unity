@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 respawnOffset = new Vector3(0, 15, 0); // Offset for respawn position
     private Rigidbody rb;
     private bool isGrounded;
-    private Vector3 startPosition;
+    private Vector3 startPosition = new Vector3(0, 1, 0);
     public Transform cameraTransform; // Reference to the camera transform
     public bool isJumping;
 
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
             // Set to a default position if no PlayerPrefs are found
             transform.position = startPosition;
         }
-        
+
         lastPosition = transform.position; // Initialize lastPosition
         isJumping = false;
 
