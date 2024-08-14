@@ -1639,6 +1639,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1277717410908641697, guid: 781e8aa728e7b2044aec941e2fcb4bb6, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 2545536211326030464, guid: beb60c67721a9be4abeeaa558470e466, type: 2}
+    - target: {fileID: 2299659417156472512, guid: 781e8aa728e7b2044aec941e2fcb4bb6, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 2545536211326030464, guid: beb60c67721a9be4abeeaa558470e466, type: 2}
     - target: {fileID: 4753418213341115904, guid: 781e8aa728e7b2044aec941e2fcb4bb6, type: 3}
       propertyPath: m_Name
       value: MenuSFX
