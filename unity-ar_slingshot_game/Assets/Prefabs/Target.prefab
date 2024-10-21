@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6647553037360369515}
   m_Layer: 0
   m_Name: Target
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,5 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db3e75be0729724c8c11fb75e47c31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 0.2
+  _moveSpeed: 1
   _navMeshAgent: {fileID: 23483217698311166}

@@ -68,15 +68,18 @@ public class PlaneDetectionManager : MonoBehaviour
             {
                 if (plane != hitPlane)
                     plane.gameObject.SetActive(false);
-/*                else
-                    plane.gameObject.GetComponent<ARPlaneMeshVisualizer>().enabled = false;*/
             }
+
             _planeSelectionDone = true;
             _detectionCanvas.gameObject.SetActive(false);
             _gameCanvas.gameObject.SetActive(true);
+
+            // Build NavMesh on the selected plane
             NavMeshSurface navMesh = hitPlane.gameObject.AddComponent<NavMeshSurface>();
             navMesh.BuildNavMesh();
             _gameManager.Plane = hitPlane;
+
         }
     }
+
 }

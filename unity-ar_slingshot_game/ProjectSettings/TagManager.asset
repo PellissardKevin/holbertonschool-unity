@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ammo
+  - Plane
+  - Target
   layers:
   - Default
   - TransparentFX
