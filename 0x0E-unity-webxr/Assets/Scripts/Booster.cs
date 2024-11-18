@@ -7,7 +7,7 @@ public class Booster : MonoBehaviour
 		if (other.CompareTag("Interactable"))
 		{
 			BallController controller = other.GetComponent<BallController>();
-			controller.rb.velocity *= 2.05f;
+			controller.rb.velocity *= 4f;
 		}
 	}
 }

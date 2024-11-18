@@ -4,7 +4,7 @@ public class BallController : MonoBehaviour
 {
 	public Animator anim;
 	public Rigidbody rb;
-	public float speed = 15f;
+	public float speed = 20f;
 	private Vector3 _moveDirection;
 
 	private void Start() => Destroy(gameObject, 20f);
